@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-import com.ui.config.Config;
+import com.config.Config;
 import io.qameta.allure.Step;
 
 public final class DriverFactory {
@@ -69,4 +69,4 @@ public final class DriverFactory {
         }
         return options;
     }
-}
+}

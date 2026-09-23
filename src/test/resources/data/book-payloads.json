@@ -1,0 +1,9 @@
+{
+  "create": [
+    {"id": 0, "title": "API automation book", "description": "Created by the Books API assessment", "pageCount": 240, "excerpt": "A reusable service-object test", "publishDate": "2026-01-15T00:00:00"},
+    {"id": 0, "title": "Second automation book", "description": "Another data-driven payload", "pageCount": 1, "excerpt": "Minimum page count", "publishDate": "2025-12-31T00:00:00"}
+  ],
+  "update": [
+    {"id": 1, "title": "Updated API automation book", "description": "Updated by the Books API assessment", "pageCount": 241, "excerpt": "An updated service-object test", "publishDate": "2026-01-16T00:00:00"}
+  ]
+}

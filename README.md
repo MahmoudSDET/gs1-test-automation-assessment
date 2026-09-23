@@ -6,7 +6,7 @@ Maven-based automation framework implemented with Java 25, REST Assured, Seleniu
 
 The Books API tests target the [FakeRESTApi bookstore API](https://fakerestapi.azurewebsites.net/index.html) and use a reusable `BooksApiService` service object for the documented `/api/v1/Books` endpoints. The suite covers two happy paths, including data-driven retrieval and create-response validation, plus an unknown-book negative case.
 
-The base URL is externalized in `src/test/resources/api.properties` and can be overridden with `-Dapi.baseUrl=<url>`. FakeRESTApi may simulate writes, so tests validate returned responses rather than assuming submitted data is persisted.
+The base URL is externalized in `src/test/resources/config.properties` and can be overridden with `-Dapi.baseUrl=<url>`. FakeRESTApi may simulate writes, so tests validate returned responses rather than assuming submitted data is persisted.
 
 ## Covered scenarios
 
@@ -23,7 +23,7 @@ The base URL is externalized in `src/test/resources/api.properties` and can be o
 - Configuration and reusable test inputs are externalized.
 - TestNG assertions provide clear failure messages.
 - Allure records API requests/responses and named UI/assertion steps.
-- Failure screenshots are written to `screenshots/`.
+- Failure screenshots are taken in `BaseTest` before the browser closes, written to `target/screenshots/`, and attached to the Allure report.
 
 ## Prerequisites
 
@@ -147,30 +147,29 @@ mvn -Dtest=FileUploadTest test
 mvn -Dtest=DynamicLoadingTest test
 ```
 
-The defaults in `src/test/resources/config.properties` can be overridden from the command line using `-Dbrowser`, `-Dheadless`, `-DbaseUrl`, or `-DtimeoutSeconds`.
+The defaults in `src/test/resources/config.properties` can be overridden from the command line using `-Dbrowser`, `-Dheadless`, `-DbaseUrl`, `-Dapi.baseUrl`, or `-DtimeoutSeconds`.
 
 ## Results
 
 - Maven/TestNG results: `target/surefire-reports/`
-- Failure screenshots: `screenshots/`
+- Failure screenshots: `target/screenshots/`
 
 ## Project structure
 
 ```text
+src/main/java/com/config/
+  Config.java           Configuration reader (UI and API)
 src/main/java/com/ui/
-  config/       Configuration reader
   driver/       Thread-safe WebDriver lifecycle
   pages/        Page objects
 src/main/java/com/api/
   Book.java             API request model
-  BooksApiConfig.java   API configuration
   BooksApiService.java  REST Assured service object
+src/test/java/com/data/
+  TestData.java CSV-backed DataProviders
 src/test/java/com/ui/
-  data/         CSV DataProvider
-  listeners/    Failure screenshot listener
-  tests/        Test classes and shared setup
+  tests/        Test classes and shared setup (driver lifecycle, failure screenshots)
 src/test/java/com/api/
-  data/         Books CSV DataProvider
   tests/        Books API tests
 src/test/resources/
   data/         Reusable test data and upload image

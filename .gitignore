@@ -8,3 +8,4 @@ test-output/
 screenshots/
 *.log
 .allure/
+graphify-out/

@@ -26,8 +26,8 @@ FakeRESTApi may simulate create, update, and delete operations without permanent
 
 - `BooksApiService` provides reusable REST Assured methods for the Books endpoints.
 - `Book` is the request model used for create and update operations.
-- `BooksApiConfig` loads the API base URL from external configuration.
-- `BooksDataProvider` loads reusable book IDs and titles from CSV.
+- `Config` loads the API base URL from external configuration.
+- `TestData` loads reusable book IDs and titles from CSV.
 - `BooksApiTest` contains fluent REST Assured assertions.
 
 ## Test coverage
@@ -83,10 +83,10 @@ mvn -Papi-tests test -Dapi.baseUrl=https://fakerestapi.azurewebsites.net
 
 ## Test data and configuration
 
-- API configuration: `src/test/resources/api.properties`
+- API configuration: `src/test/resources/config.properties` (`api.baseUrl`)
 - Book data: `src/test/resources/data/books.csv`
 - API service: `src/main/java/com/api/BooksApiService.java`
-- API data provider: `src/test/java/com/api/data/BooksDataProvider.java`
+- API data provider: `src/test/java/com/data/TestData.java`
 - API tests: `src/test/java/com/api/tests/BooksApiTest.java`
 
 ## Results

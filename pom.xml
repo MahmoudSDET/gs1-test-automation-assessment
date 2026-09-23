@@ -20,7 +20,6 @@
         <allure.report.version>2.29.0</allure.report.version>
         <allure.maven.version>2.15.2</allure.maven.version>
         <aspectj.version>1.9.24</aspectj.version>
-        <test.scope>all</test.scope>
         <testng.suite.file>testng.xml</testng.suite.file>
     </properties>
 
@@ -84,19 +83,10 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>com.listeners.TestFailureListener</value>
-                        </property>
-                    </properties>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                        <test.scope>${test.scope}</test.scope>
                     </systemPropertyVariables>
                     <argLine>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar</argLine>
-                    <parallel>methods</parallel>
-                    <threadCount>2</threadCount>
                 </configuration>
             </plugin>
             <plugin>
@@ -136,42 +126,14 @@
         <profile>
             <id>api-tests</id>
             <properties>
-                <test.scope>api</test.scope>
                 <testng.suite.file>testng-api.xml</testng.suite.file>
             </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <includes>
-                                <include>com/api/tests/**/*Test.java</include>
-                            </includes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
         <profile>
             <id>ui-tests</id>
             <properties>
-                <test.scope>ui</test.scope>
                 <testng.suite.file>testng-ui.xml</testng.suite.file>
             </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <includes>
-                                <include>com/ui/tests/**/*Test.java</include>
-                            </includes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import io.qameta.allure.Step;
 
-import com.ui.config.Config;
+import com.config.Config;
 
 public final class HomePage extends BasePage {
     private static final By FILE_UPLOAD_LINK = By.linkText("File Upload");
@@ -32,4 +32,4 @@ public final class HomePage extends BasePage {
         click(DYNAMIC_LOADING_LINK);
         return new DynamicLoadingPage(driver).waitUntilReady();
     }
-}
+}

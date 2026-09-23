@@ -1,4 +1,4 @@
-package com.ui.config;
+package com.config;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +16,10 @@ public final class Config {
         return value("baseUrl");
     }
 
+    public static String apiBaseUrl() {
+        return value("api.baseUrl");
+    }
+
     public static String browser() {
         return value("browser");
     }
@@ -29,7 +33,11 @@ public final class Config {
     }
 
     private static String value(String key) {
-        return System.getProperty(key, PROPERTIES.getProperty(key));
+        String value = System.getProperty(key, PROPERTIES.getProperty(key));
+        if (value == null || value.isBlank()) {
+            throw new IllegalStateException("Missing configuration value: " + key);
+        }
+        return value.trim();
     }
 
     private static Properties loadProperties() {
@@ -44,4 +52,4 @@ public final class Config {
             throw new IllegalStateException("Unable to load " + CONFIG_FILE, exception);
         }
     }
-}
+}
